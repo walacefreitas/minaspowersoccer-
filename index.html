@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minas Power Soccer</title>
+    <meta name="description" content="Minas Power Soccer, o primeiro time de Power Soccer de Minas Gerais.">
+    <meta name="keywords" content="Power Soccer, Minas Gerais, Futebol, Esporte Adaptado">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #2874A6; /* Azul da logo */
+            color: white;
+            padding: 1em 2em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        header .logo-container {
+            background-color: white; /* Fundo branco atrás da logo */
+            padding: 5px; /* Espaço ao redor da logo */
+            border-radius: 5px; /* Bordas arredondadas */
+        }
+
+        header .logo-container img {
+            width: 80px; /* Ajustado para melhor visualização em dispositivos móveis */
+            height: auto;
+            transition: filter 0.3s;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700; /* Mudança de cor suave ao passar o mouse */
+        }
+
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-icon div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: #2874A6;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+        }
+
+        main {
+            padding: 2em;
+        }
+
+        section {
+            display: none;
+            margin-bottom: 2em;
+            padding: 1em;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        h2 {
+            font-family: 'Georgia', serif;
+            color: #2C3E50;
+            text-align: center; /* Centralizando o título */
+            font-size: 1.5em; /* Ajuste do tamanho da fonte */
+        }
+
+        h3 {
+            font-family: 'Georgia', serif;
+            color: #16A085;
+            font-size: 1.2em; /* Ajuste do tamanho da fonte */
+        }
+
+        footer {
+            background-color: #2874A6; /* Azul da logo */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .athlete {
+            border: 1px solid #2874A6;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .athlete img {
+            width: 150px; /* Ajustado para melhor visualização em dispositivos móveis */
+            height: 150px;
+            object-fit: cover; /* Para garantir que a imagem ocupe o espaço sem distorcer */
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .athlete img:hover {
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Espaço adicional acima do vídeo */
+        }
+
+        .video-container video {
+            max-width: 100%;
+            height: auto;
+            max-height: 360px; /* Definindo altura máxima */
+        }
+
+        .team-photo {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .team-photo img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #2874A6;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #005f8c;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .athlete img {
+                width: 100px;
+                height: 100px;
+            }
+
+            main {
+                padding: 1em;
+            }
+
+            section {
+                padding: 1em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1em;
+            }
+
+            .video-container {
+                margin-top: 10px; /* Espaço adicional acima do vídeo */
+            }
+
+            .video-container video {
+                max-height: 200px; /* Ajustando altura máxima para dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png.jpeg" alt="Logo do Minas Power Soccer">
+        </div>
+        <h1>Minas Power Soccer</h1>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio" onclick="showSection('inicio')">Início</a></li>
+                <li><a href="#sobre" onclick="showSection('sobre')">Sobre</a></li>
+                <li><a href="#atletas" onclick="showSection('atletas')">Atletas</a></li>
+                <li><a href="https://www.instagram.com/minaspowersoccer?igsh=MWdyMW1xc2Nwamh3dw==" target="_blank">Instagram</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="inicio" class="active" data-aos="fade-up">
+            <h2>Bem-vindo</h2>
+            <p>Bem-vindo ao site do Minas Power Soccer, o primeiro time de Power Soccer de Minas Gerais! Aqui você encontrará todas as informações sobre nossa equipe, nossa missão, e como você pode nos apoiar.</p>
+            <h3>Nossa Missão</h3>
+            <p>Nossa missão é proporcionar oportunidades para que pessoas com deficiência possam praticar esportes, desenvolver suas habilidades, e alcançar seus sonhos. Acreditamos que o esporte é uma poderosa ferramenta de inclusão social e transformação de vidas. Trabalhamos para sensibilizar a sociedade sobre a importância do esporte adaptado e para conquistar maior visibilidade e apoio para nossa modalidade.</p>
+            <h3>Treinamentos e Competições</h3>
+            <p>Nossos treinos acontecem semanalmente em locais acessíveis e equipados para atender as necessidades de nossos atletas. Participamos de competições regionais e nacionais, sempre buscando aprimorar nosso desempenho e representar Minas Gerais com orgulho.</p>
+            <div class="video-container">
+                <video controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    Seu navegador não suporta o elemento de vídeo.
+                </video>
+            </div>
+        </section>
+        <section id="sobre" data-aos="fade-up">
+            <h2>Nosso Time</h2>
+            <p>O Minas Power Soccer é o primeiro time de Power Soccer de Minas Gerais. Fundado em 2022, temos como objetivo promover o esporte e a inclusão através do futebol em cadeira de rodas motorizada. Nosso time é composto por atletas dedicados que treinam arduamente para competir em alto nível.</p>
+            <p>Participamos de diversos campeonatos regionais e nacionais, sempre buscando melhorar nosso desempenho e levar o nome de Minas Gerais ao topo do Power Soccer. Além disso, nos dedicamos a atividades comunitárias, promovendo o esporte para pessoas com deficiência e incentivando a inclusão social através do esporte.</p>
+            <p>Nosso compromisso é com a excelência esportiva e o desenvolvimento pessoal de nossos atletas. Acreditamos que o esporte tem o poder de transformar vidas e estamos empenhados em criar oportunidades para que nossos jogadores possam crescer e alcançar seu potencial máximo.</p>
+            <div class="team-photo">
+                <img src="IMAGEM TODO O TIME.jpeg" alt="Foto do Time Minas Power Soccer">
+            </div>
+        </section>
+        <section id="atletas" data-aos="fade-up">
+            <h2>Atletas</h2>
+            <div class="athlete">
+                <img src="IAGO (1).png" alt="Iago" loading="lazy">
+            </div>
+            <div class="athlete">
+                <img src="ICARO (1).png" alt="Ícaro" loading="lazy">
+            </div>
+            <div class="athlete">
+                <img src="WALACE (1).png" alt="Walace" loading="lazy">
+            </div>
+            <div class="athlete">
+                <img src="EDVARD (1).png" alt="Edvard" loading="lazy">
+            </div>
+            <div class="athlete">
+                <img src="atletas/athlete5.jpg" alt="André" loading="lazy">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Minas Power Soccer</p>
+    </footer>
+    <div class="back-to-top" id="back-to-top">↑</div>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        function toggleMenu() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('active');
+        }
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('main section');
+            sections.forEach(section => {
+                section.classList.toggle('active', section.id === sectionId);
+            });
+        }
+        // Mostrar a seção "Início" por padrão ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('inicio');
+        });
+
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
